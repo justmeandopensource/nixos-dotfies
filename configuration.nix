@@ -209,7 +209,13 @@ in
     options = "--delete-older-than 30d";
   };
 
-  system.stateVersion = "22.05";
+  system = {
+    autoUpgrade = {
+      enable = true;
+      dates = "daily";
+    };
+    stateVersion = "22.05";
+  };
 
 }
 

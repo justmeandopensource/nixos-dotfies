@@ -1,0 +1,48 @@
+#!/usr/bin/env python
+
+# pip install --user python-binance
+from binance.client import Client
+import argparse
+
+def get_client():
+    apiKey    = "X3G2v0ntk3RO9262qwH73SFEd9V8uDKL6dZCwDEQVQWC3QaZMS6QMJeNEUqaq2dO"
+    apiSecret = "SEd0DrquaQ4w3FRacD6MZ8AZOjCE1ky5M4vXd2I1nlCOhEmhj4HkDLotr9iT2COL"
+    return Client(apiKey, apiSecret)
+
+def get_coin_stats(symbol, item=None):
+    client = get_client()
+    stats = client.get_ticker(symbol=symbol)
+    if item is None:
+        lastPrice = "%0.2f" % float(stats['lastPrice'])
+        highPrice = "%0.2f" % float(stats['highPrice'])
+        lowPrice = "%0.2f" % float(stats['lowPrice'])
+        output = "%s [%s - %s]" % (lastPrice, highPrice, lowPrice)
+        return output
+    if item == "price":
+        return "%0.2f" % float(stats["lastPrice"])
+    return None
+
+def main():
+    parser = argparse.ArgumentParser(description="Binance API Helper")
+    subparsers = parser.add_subparsers(dest="action")
+    
+    subparser_list = subparsers.add_parser("price", help="get current price of a coin")
+    subparser_list.add_argument("symbol", help="coin symbol. Ex: ETHGBP")
+
+    subparser_list = subparsers.add_parser("stats", help="get 24h stats of a coin")
+    subparser_list.add_argument("symbol", help="coin symbol. Ex: ETHGBP")
+
+    #subparser_add  = subparsers.add_parser("add", help="add a new command")
+
+    args = parser.parse_args()
+
+    if args.action == "price":
+        print(get_coin_stats(args.symbol, "price"))
+    elif args.action == "stats":
+        print(get_coin_stats(args.symbol))
+    else:
+        parser.parse_args(["--help"])
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Launch a specific Qutebrowser profile
+
+PROFILES_DIR="$HOME/.config/qutebrowser/profiles"
+
+[[ -e $PROFILES_DIR ]] || exit
+
+PROFILE=$(ls -1 $PROFILES_DIR | rofi -dmenu)
+
+[[ -n $PROFILE ]] && qutebrowser --basedir $PROFILES_DIR/$PROFILE &

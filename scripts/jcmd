@@ -1,0 +1,97 @@
+#!/usr/bin/env python
+
+import os
+import sys
+import argparse
+import re
+import subprocess
+import textwrap
+from tabulate import tabulate
+from colored import fore, style
+
+CMD_FILE = "%s/.jcmd" % os.environ["HOME"]
+
+TERM_WIDTH = os.get_terminal_size().columns - 6
+wrapper = textwrap.TextWrapper(width=TERM_WIDTH)
+
+# Check if ~/.jcmd exist
+def check_cmd_file():
+    if not os.path.isfile(CMD_FILE):
+        print(fore.YELLOW + "Pot empty!" + style.RESET)
+        sys.exit(1)
+
+def get_input(text):
+    return input(fore.LIGHT_BLUE + text + style.RESET)
+
+def jcmd_add():
+    command = get_input("command: ")
+    with open(CMD_FILE, "a") as outfile:
+        outfile.write(command + "\n")
+    print(fore.YELLOW + "Command added!" + style.RESET)
+
+def jcmd_run(keyword):
+    check_cmd_file()
+    tbl_data = []
+    tbl_data_dict = {}
+    with open(CMD_FILE) as infile:
+        counter = 0
+        if keyword is None:
+            print(fore.YELLOW + "Search keyword required" + style.RESET)
+        else:
+            for entry in infile.readlines():
+                if re.search(keyword, entry):
+                    counter = counter + 1
+                    tbl_data.append([counter, wrapper.fill(text=entry)])
+                    tbl_data_dict[str(counter)] = entry
+    print("\n" + fore.LIGHT_GRAY + tabulate(tbl_data, ["Id", "Command"], tablefmt="simple") + style.RESET)
+    cmd_id = get_input("\nSelect Id of the command to run : ")
+    print()
+    if cmd_id != "":
+        os.system(tbl_data_dict[cmd_id])    
+
+def jcmd_list(keyword):
+    check_cmd_file()
+    tbl_data = []
+    tbl_data_dict = {}
+    with open(CMD_FILE) as infile:
+        counter = 0
+        if keyword is None:
+            for entry in infile.readlines():
+                counter = counter + 1
+                tbl_data.append([counter, wrapper.fill(text=entry)])
+                tbl_data_dict[str(counter)] = entry
+        else:
+            for entry in infile.readlines():
+                if re.search(keyword, entry):
+                    counter = counter + 1
+                    tbl_data.append([counter, wrapper.fill(text=entry)])
+                    tbl_data_dict[str(counter)] = entry
+    print("\n" + fore.LIGHT_GRAY + tabulate(tbl_data, ["Id", "Command"], tablefmt="simple") + style.RESET)
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Store your favourite commands!")
+    subparsers = parser.add_subparsers(dest="action")
+    
+    subparser_list = subparsers.add_parser("list", help="search/list stored commands")
+    subparser_list.add_argument("keyword", help="search keyword", nargs="?", default=None)
+
+    subparser_list = subparsers.add_parser("run", help="search/run stored commands")
+    subparser_list.add_argument("keyword", help="search keyword", nargs="+")
+
+    subparser_add  = subparsers.add_parser("add", help="add a new command")
+
+    args = parser.parse_args()
+
+    if args.action == "list":
+        jcmd_list(args.keyword)
+    elif args.action == "run":
+        jcmd_run(args.keyword[0])        
+    elif args.action == "add":
+        jcmd_add()
+    else:
+        parser.parse_args(["--help"])
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()

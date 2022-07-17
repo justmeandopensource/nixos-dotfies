@@ -1,0 +1,334 @@
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+set $mod Mod4
+
+# Configure border style <normal|1pixel|pixel xx|none|pixel>
+new_window pixel 1
+new_float normal
+
+# Hide borders
+hide_edge_borders none
+
+# Window title font
+font pango:Roboto Regular 11
+
+# Use Mouse+$mod to drag floating windows
+floating_modifier $mod
+
+# Focus follows mouse
+focus_follows_mouse yes
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout tabbed
+bindsym $mod+d layout toggle split
+
+# Enable touchpad natural scrolling
+exec_always --no-startup-id xinput set-prop "DLL0945:00 06CB:CDE6 Touchpad" "libinput Natural Scrolling Enabled" 1
+
+# Set screen resolution to 1920x1200
+exec --no-startup-id xrandr --output eDP-1 --mode 1920x1200
+
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+bindsym $mod+Shift+Return exec --no-startup-id alacritty
+bindsym $mod+Shift+Ctrl+Return exec --no-startup-id "HISTFILE=$HOME/.zsh_history_jmos alacritty -t jmos"
+
+bindsym $mod+Shift+c exec --no-startup-id "$HOME/opt/scripts/junglecamtoggle"
+bindsym $mod+Shift+e exec leafpad
+bindsym $mod+Shift+p exec pavucontrol
+bindsym $mod+Shift+w exec qutebrowser
+bindsym $mod+Shift+y exec alacritty --class mpsyt --title mpsyt -e "$HOME/.local/bin/mpsyt"
+
+# hacky multi-monitor switch helper
+bindsym $mod+Ctrl+1 exec "$HOME/opt/scripts/switch-monitor builtin"
+bindsym $mod+Ctrl+2 exec "$HOME/opt/scripts/switch-monitor samsung"
+
+bindsym $mod+Ctrl+c exec "rofi -show calc -modi calc -no-show-match -no-sort"
+bindsym $mod+Ctrl+m exec "amixer -q sset Capture toggle"
+bindsym $mod+Ctrl+w exec "$HOME/opt/scripts/junglebrowserlauncher"
+
+bindsym $mod+Ctrl+Shift+w exec qutebrowser ":open -p"
+
+bindsym $mod+space --release exec "rofi -show combi"
+bindsym $mod+Print --release exec flameshot gui
+bindsym $mod+q kill
+
+# Autostart applications
+exec --no-startup-id dunst
+exec --no-startup-id picom -b
+exec --no-startup-id nm-applet
+exec --no-startup-id xfce4-power-manager
+exec --no-startup-id blueman-applet
+exec --no-startup-id xautolock -time 10 -locker blurlock
+exec --no-startup-id redshift-gtk -l 52.33251:-0.07656           # co-ordinates for St Ives, Cambridgeshire
+exec --no-startup-id volumeicon
+exec --no-startup-id copyq
+exec --no-startup-id fusuma
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+bindsym $mod+z split toggle
+bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+space floating toggle
+
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+bindsym $mod+Ctrl+Right workspace next
+bindsym $mod+Ctrl+Left workspace prev
+
+# Media player controls
+bindsym XF86AudioPlay exec "playerctl play-pause"
+bindsym XF86AudioPause exec "playerctl play-pause"
+
+# Volume controls
+bindsym XF86AudioMute exec amixer sset 'Master' toggle
+bindsym XF86AudioLowerVolume exec amixer sset 'Master' 5%-
+bindsym XF86AudioRaiseVolume exec amixer sset 'Master' 5%+
+
+# Brightness controls
+bindsym XF86MonBrightnessUp exec brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+
+# Workspace names
+# Eg: set $ws1 1:mail
+#     set $ws2 2:
+set $ws1 1
+set $ws2 2
+set $ws3 3
+set $ws4 4
+set $ws5 5
+set $ws6 6
+set $ws7 7
+set $ws8 8
+set $ws9 9
+
+# Switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+
+# Move to workspace with focused container
+bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4; workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
+
+# Move entire workspace to left or right monitor
+bindsym $mod+Ctrl+Shift+Left move workspace to output left
+bindsym $mod+Ctrl+Shift+Right move workspace to output right
+bindsym $mod+Ctrl+Shift+Up move workspace to output up
+bindsym $mod+Ctrl+Shift+Down move workspace to output down
+
+# Open applications on specific workspaces
+#assign [class="Gnome-terminal|Pcmanfm|Leafpad"] $ws1
+assign [class="Alacritty"] $ws1
+assign [class="qutebrowser|Google-chrome|firefox"] $ws2
+assign [class="Slack|Microsoft Teams - Preview|discord|Thunderbird"] $ws3
+assign [class="Code|Leafpad"] $ws4
+assign [class="libreoffice-*|Soffice|Virt-manager|VirtualBox Manager"] $ws5
+assign [class="Gnucash"] $ws6
+
+# Open specific applications in floating mode
+for_window [class="Lxappearance"] floating enable sticky enable border normal
+for_window [class="Pavucontrol"] floating enable
+for_window [class="Simple-scan"] floating enable border normal
+for_window [class="MPlayer"] floating enable
+for_window [class="Virt-viewer"] floating enable
+for_window [class="System-config-printer.py"] floating enable border normal
+for_window [class="SimpleScreenRecorder"] floating enable border normal
+for_window [title="mpsyt"] floating enable resize set 900 900
+for_window [title="mpsyt"] move position 100 80
+for_window [class="mpv"] floating enable sticky enable resize set 640 360
+for_window [class="mpv"] move position 1275 35
+for_window [class="MPlayer" title="junglecam"] floating enable sticky enable
+for_window [class="MPlayer" title="junglecam"] move position 1590 800
+for_window [title="Microsoft Teams Notification"] floating enable
+
+# switch to workspace with urgent window automatically
+for_window [urgent=latest] focus
+focus_on_window_activation focus
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Ctrl+r reload
+bindsym $mod+Ctrl+t restart
+
+# Set shut down, restart and locking features
+bindsym $mod+Ctrl+Delete mode "$mode_system"
+set $mode_system (l)ogout, s(u)spend, (r)eboot, (s)hutdown
+mode "$mode_system" {
+    bindsym u exec --no-startup-id $HOME/opt/scripts/i3exit suspend, mode "default"
+    bindsym l exec --no-startup-id $HOME/opt/scripts/i3exit logout, mode "default"
+    bindsym r exec --no-startup-id $HOME/opt/scripts/i3exit reboot, mode "default"
+    bindsym s exec --no-startup-id $HOME/opt/scripts/i3exit shutdown, mode "default"
+
+    # exit system mode: "Enter" or "Escape"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# Resize window (you can also use the mouse for that)
+bindsym $mod+r mode "resize"
+mode "resize" {
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px
+        bindsym Down resize grow height 10 px
+        bindsym Up resize shrink height 10 px
+        bindsym Right resize grow width 10 px
+
+        # exit resize mode: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# Lock screen
+bindsym $mod+l exec --no-startup-id /usr/bin/i3lock-multimonitor
+
+
+# Color palette used for the terminal ( ~/.Xresources file )
+# Colors are gathered based on the documentation:
+# https://i3wm.org/docs/userguide.html#xresources
+# Change the variable name at the place you want to match the color
+# of your terminal like this:
+# [example]
+# If you want your bar to have the same background color as your 
+# terminal background change the line 362 from:
+# background #14191D
+# to:
+# background $term_background
+# Same logic applied to everything else.
+set_from_resource $term_background background
+set_from_resource $term_foreground foreground
+set_from_resource $term_color0     color0
+set_from_resource $term_color1     color1
+set_from_resource $term_color2     color2
+set_from_resource $term_color3     color3
+set_from_resource $term_color4     color4
+set_from_resource $term_color5     color5
+set_from_resource $term_color6     color6
+set_from_resource $term_color7     color7
+set_from_resource $term_color8     color8
+set_from_resource $term_color9     color9
+set_from_resource $term_color10    color10
+set_from_resource $term_color11    color11
+set_from_resource $term_color12    color12
+set_from_resource $term_color13    color13
+set_from_resource $term_color14    color14
+set_from_resource $term_color15    color15
+
+# Start i3bar 
+#bar {
+#        font xft:Font Awesome 11
+#	i3bar_command i3bar
+#	status_command i3blocks
+#	position bottom
+#
+#      # please set your primary output first. Example: 'xrandr --output eDP1 --primary'
+#	tray_output primary
+#	# tray_output eDP1
+#
+#	bindsym button4 nop
+#	bindsym button5 nop
+#
+#    colors {
+#        background #222D31
+#        statusline #F9FAF9
+#        separator  #454947
+#
+#        #                  border  backgr  text
+#        focused_workspace  #F9FAF9 #16a085 #292F34
+#        active_workspace   #595B5B #353836 #FDF6E3
+#        inactive_workspace #595B5B #222D31 #EEE8D5
+#        binding_mode       #16a085 #2C2C2C #F9FAF9
+#        urgent_workspace   #16a085 #FDF6E3 #E5201D
+#    }
+#}
+
+# hide/unhide i3bar
+bindsym $mod+m bar mode toggle
+
+# Theme colors
+# class                   border  backgr. text    indic.   child_border
+  client.focused          #16a085 #16a085 #80FFF9 #FDF6E3
+  client.focused_inactive #2F3D44 #2F3D44 #1ABC9C #454948
+  client.unfocused        #2F3D44 #2F3D44 #1ABC9C #454948
+  client.urgent           #CB4B16 #FDF6E3 #1ABC9C #268BD2
+  client.placeholder      #000000 #0c0c0c #ffffff #000000 
+
+  client.background       #2B2C2B
+
+#############################
+### settings for i3-gaps: ###
+#############################
+
+# Set inner/outer gaps
+gaps inner 10
+gaps outer 0
+
+# Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
+# gaps inner|outer current|all set|plus|minus <px>
+# gaps inner all set 10
+# gaps outer all plus 5
+
+# Smart gaps (gaps used if only more than one container on the workspace)
+#smart_gaps on
+
+# Smart borders (draw borders around container only if it is not the only container on this workspace) 
+# on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
+#smart_borders on
+
+# Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}

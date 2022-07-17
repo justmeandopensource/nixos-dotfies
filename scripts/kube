@@ -1,0 +1,115 @@
+#!/usr/bin/env python3
+
+import argparse
+from git import Repo
+import os
+import sys
+import vagrant
+import shutil
+from pathlib import Path
+import paramiko
+from scp import SCPClient
+
+BASE_DIR                 = os.path.expanduser('~') + "/justmeandopensource"
+BASE_KUBE_DIR            = BASE_DIR + "/kubernetes"
+KUBECONFIG_DIR           = os.path.expanduser('~') + "/.kube"
+KUBECONFIG_FILE          = KUBECONFIG_DIR + "/config"
+DEFAULT_VAGRANT_PROVIDER = "libvirt"
+DEFAULT_K8S_VERSION      = "1.24"
+DEFAULT_WORKERS_COUNT    = 2
+VAGRANT_PROVISIONING_DIR = BASE_KUBE_DIR + "/vagrant-provisioning"
+VAGRANTFILE              = VAGRANT_PROVISIONING_DIR + "/Vagrantfile"
+BOOTSTRAP_FILE           = VAGRANT_PROVISIONING_DIR + "/bootstrap.sh"
+
+def banner(title):
+    print("=" * 50)
+    print(title)
+    print("=" * 50)
+
+def provision(provider, workers, version):
+    banner("Kube => Provisioning Kubernetes Cluster")
+    print("Provider: %s" % provider)
+    print("Workers: %s" % workers)
+    print("Kubernetes Version: v%s\n" % version)
+
+    check_existing_cluster()
+
+    # Clone kubernetes repo
+    print("Cloning justmeandopensource/kubernetes repo...")
+    Repo.clone_from("https://github.com/justmeandopensource/kubernetes.git", BASE_KUBE_DIR)
+
+    # Modifications to vagrantfile if needed
+    Path(VAGRANTFILE).write_text(Path(VAGRANTFILE).read_text().replace("WORKER_NODES_COUNT  = 2", "WORKER_NODES_COUNT  = %s" % workers))
+    Path(BOOTSTRAP_FILE).write_text(Path(BOOTSTRAP_FILE).read_text().replace("1.24", version))
+
+    # Vagrant up
+    print("\nRunning vagrant up...\n")
+    v = vagrant.Vagrant(VAGRANT_PROVISIONING_DIR, out_cm=vagrant.stdout_cm)
+    v.up(provider=provider)
+
+    # Copy kubeconfig file from kmaster
+    print("\nCopying kubeconfig file...\n")
+    ssh = paramiko.SSHClient()
+    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    ssh.connect(hostname='172.16.16.100', username='root', password='kubeadmin')
+    scp = SCPClient(ssh.get_transport())
+    if not os.path.exists(KUBECONFIG_DIR):
+        os.mkdir(KUBECONFIG_DIR)
+    scp.get('/etc/kubernetes/admin.conf', KUBECONFIG_FILE)
+
+
+def destroy():
+    banner("Kube => Destroying Kubernetes Cluster")
+    print("Running vagrant destroy...")
+    if os.path.exists(VAGRANT_PROVISIONING_DIR):
+        v = vagrant.Vagrant(VAGRANT_PROVISIONING_DIR, out_cm=vagrant.stdout_cm)
+        v.destroy()    
+    print("Deleting %s..." % BASE_DIR)
+    if os.path.exists(BASE_DIR):
+        shutil.rmtree(BASE_DIR)
+    print("Deleting %s..." % KUBECONFIG_FILE)
+    if os.path.exists(KUBECONFIG_DIR):
+        shutil.rmtree(KUBECONFIG_DIR)
+
+def status():
+    if os.path.exists(BASE_DIR):
+        print("Found %s" % BASE_DIR)
+    if os.path.exists(KUBECONFIG_FILE):
+        print("Found %s" % KUBECONFIG_FILE)
+    if os.path.exists(VAGRANT_PROVISIONING_DIR):
+        v = vagrant.Vagrant(VAGRANT_PROVISIONING_DIR, out_cm=vagrant.stdout_cm)
+        print("\nVagrant status output:")
+        print(v.status())    
+
+
+def check_existing_cluster():
+    if os.path.exists(BASE_KUBE_DIR):
+        print("Found %s. Exiting." % BASE_KUBE_DIR)
+        sys.exit(1)
+    if os.path.exists(KUBECONFIG_FILE):
+        print("Found %s. Exiting." % KUBECONFIG_FILE)
+        sys.exit(1)
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("command", choices=["provision", "destroy", "status"], help="type of action")
+    parser.add_argument("-p", "--provider", choices=["libvirt", "virtualbox"], help="provider to use")
+    parser.add_argument("-n", "--workers", help="number of worker nodes")
+    parser.add_argument("-v", "--version", help="kubernetes version. Ex: 1.24")
+    args = parser.parse_args()
+
+    if args.command == "provision":
+        provider = args.provider if args.provider else DEFAULT_VAGRANT_PROVIDER
+        workers  = args.workers if args.workers else DEFAULT_WORKERS_COUNT
+        version  = args.version if args.version else DEFAULT_K8S_VERSION
+        provision(provider, workers, version)
+    elif args.command == "destroy":
+        destroy()
+    elif args.command == "status":
+        status()
+    
+    return True
+
+if __name__ == "__main__":
+  main()

@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+RCL_REMOTE="wgdrive"
+RCL_OPTIONS="--create-empty-src-dirs --verbose"
+BACKUP_LIST="/tmp/rclone-backup-list.$$"
+
+cat > $BACKUP_LIST << EOF
+/vault/**
+/.config/qutebrowser/profiles/*/config/quickmarks
+/.config/qutebrowser/quickmarks
+/.local/share/gnucash/saved-reports*
+/.local/share/jcal/**
+/.jcmd
+EOF
+
+# See if we have rclone installed
+which rclone >/dev/null 2>&1
+
+if [[ "$?" -ne 0 ]]; then
+  echo "[ERR] rclone doesn't seem to be installed"
+  echo "[INF] exiting"
+  exit 1
+fi
+
+# See if rclone has the Google Drive remote added
+rclone listremotes | grep -q $RCL_REMOTE
+if [[ "$?" -ne 0 ]]; then
+  echo "[ERR] rclone: no remote named $RCL_REMOTE configured"
+  echo "[INF] exiting"
+  exit 1
+fi
+
+echo "[INF] Starting backup ..."
+# Relies on ~/.config/rclone/rclone.conf for destination and credential token
+rclone sync -L --include-from ${BACKUP_LIST} ${HOME} ${RCL_REMOTE}:"junix-backup" ${RCL_OPTIONS} $1
+
+echo "[INF] Completed backup"

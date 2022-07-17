@@ -1,0 +1,7 @@
+#!/bin/bash
+
+[[ -e "/dev/video4" ]] && WEBCAM=/dev/video4 || WEBCAM=/dev/video0
+
+LAUNCH="mplayer -title junglecam -geometry 320x240 -tv driver=v4l2:device=$WEBCAM tv://"
+
+pkill -f "mplayer -title junglecam" || $LAUNCH

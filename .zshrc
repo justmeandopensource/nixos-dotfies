@@ -6,6 +6,9 @@ alias sudo='sudo '
 alias watch='watch '
 alias k='kubectl '
 alias fan='sensors | grep --color=none fan'
+alias gcl='git clone --recurse-submodules'
+alias ggpull='git pull origin "$(git_current_branch)"'
+alias ggpush='git push origin "$(git_current_branch)"'
 
 #-===================================================-#
 # Exports

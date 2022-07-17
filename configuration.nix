@@ -45,12 +45,12 @@ in
         extraPackages = with pkgs; [
           adapta-gtk-theme
           arandr
+          betterlockscreen
           brightnessctl
           dmenu
           dunst
           feh
           i3blocks
-          i3lock
           i3status
           lxappearance
           networkmanagerapplet

@@ -198,7 +198,7 @@ mode "resize" {
 }
 
 # Lock screen
-bindsym $mod+l exec --no-startup-id /usr/bin/i3lock-multimonitor
+bindsym $mod+l exec --no-startup-id betterlockscreen -l dimblur --off 5
 
 
 # Color palette used for the terminal ( ~/.Xresources file )

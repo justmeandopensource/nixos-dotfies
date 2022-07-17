@@ -1,27 +1,32 @@
 
 { config, pkgs, ... }:
 
+let
+
+  primary_user = "venkatn";
+
+in
+
 {
   imports =
     [
       ./hardware-configuration.nix
     ];
 
-  # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "junix";
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
   time.timeZone = "Europe/London";
 
   services = {
+    blueman.enable = true;
     cron = {
       enable = true;
       systemCronJobs = [
-        "#0 * * * *     venkatn \$HOME/opt/scripts/backup"
+        "#0 * * * *     ${primary_user} \$HOME/opt/scripts/backup"
       ];
     };
     xserver = {
@@ -66,7 +71,6 @@
   environment.pathsToLink = [ "/libexec" ];
   environment.etc.hosts.mode = "0644";
 
-  # Enable sound.
   sound = {
     enable = true;
     mediaKeys = {
@@ -74,12 +78,16 @@
       volumeStep = "5%";
     };
   };
-  hardware.pulseaudio = {
-    enable = true;
-    package = pkgs.pulseaudioFull;
+
+  hardware = {
+    bluetooth.enable = true;
+    pulseaudio = {
+      enable = true;
+      package = pkgs.pulseaudioFull;
+    };
   };
 
-  users.users.venkatn = {
+  users.users.${primary_user} = {
     isNormalUser = true;
     initialPassword = "password1234";
     shell = pkgs.zsh;
@@ -87,7 +95,7 @@
   };
 
   security.sudo.extraRules= [
-    {  users = [ "venkatn" ];
+    {  users = [ "${primary_user}" ];
       commands = [
          { command = "ALL" ;
            options= [ "NOPASSWD" ]; 
@@ -99,6 +107,7 @@
   environment.systemPackages = with pkgs; [
     alacritty
     bc
+    copyq
     firefox
     flameshot
     fusuma

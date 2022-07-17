@@ -57,11 +57,8 @@ bindsym $mod+q kill
 exec --no-startup-id dunst
 exec --no-startup-id picom -b
 exec --no-startup-id nm-applet
-exec --no-startup-id xfce4-power-manager
 exec --no-startup-id blueman-applet
-exec --no-startup-id xautolock -time 10 -locker blurlock
-exec --no-startup-id redshift-gtk -l 52.33251:-0.07656           # co-ordinates for St Ives, Cambridgeshire
-exec --no-startup-id volumeicon
+exec --no-startup-id redshift-gtk -l 52.37092:-1.26417 # Rugby
 exec --no-startup-id copyq
 exec --no-startup-id fusuma
 

@@ -18,7 +18,12 @@
   time.timeZone = "Europe/London";
 
   services = {
-    cron.enable = true;
+    cron = {
+      enable = true;
+      systemCronJobs = [
+        "#0 * * * *     venkatn \$HOME/opt/scripts/backup"
+      ];
+    };
     xserver = {
       enable = true;
       layout = "gb";
@@ -59,6 +64,7 @@
   };
 
   environment.pathsToLink = [ "/libexec" ];
+  environment.etc.hosts.mode = "0644";
 
   # Enable sound.
   sound = {

@@ -1,0 +1,22 @@
+#!/usr/bin/env python
+
+import urllib.request
+from urllib.error import URLError
+import json
+import time
+import sys
+
+key = "<PASTE_API_KEY_HERE>"
+
+for x in range(3):
+    try:
+        data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=wenkatn&key="+key).read()
+        subs = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
+        videos = json.loads(data)["items"][0]["statistics"]["videoCount"]
+        print("%s.%s" % (subs,videos))
+        sys.exit(0)
+    except URLError as e:
+        time.sleep(20)
+
+print("Error retrieving data. Check your network!", file=sys.stderr)
+sys.exit(1)

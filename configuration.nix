@@ -111,6 +111,7 @@ in
     alacritty
     bc
     bitwarden
+    bitwarden-cli
     copyq
     firefox
     flameshot
@@ -119,6 +120,7 @@ in
     gnucash
     qutebrowser
     htop
+    keyutils
     killall
     kubectl
     kubectx

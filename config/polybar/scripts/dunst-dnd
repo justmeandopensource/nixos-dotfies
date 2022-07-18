@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+which dunstctl >/dev/null 2>&1 || return
+
+if [[ "$(dunstctl is-paused)" == "true" ]]; then
+  echo "%{F#707880}%{F-}"
+else
+  echo ""
+fi
+

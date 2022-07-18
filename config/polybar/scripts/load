@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+LOAD=$(cat /proc/loadavg)
+
+min_01=$(echo $LOAD | awk '{print $1}')
+min_05=$(echo $LOAD | awk '{print $2}')
+min_15=$(echo $LOAD | awk '{print $3}')
+
+RED="#E74C3C"
+AMBER="#F39C12"
+YELLOW="#F4D03F"
+NORMAL="#9E9E9E"
+
+for i in min_01 min_05 min_15; do
+  if [[ "${!i%.*}" -ge 5 ]]; then
+    eval c_$i=$RED
+  elif [[ "${!i%.*}" -ge "3" ]]; then
+    eval c_$i=$AMBER
+  elif [[ "${!i%.*}" -ge "2" ]]; then
+    eval c_$i=$YELLOW
+  else
+    eval c_$i=$NORMAL
+  fi
+done
+
+echo -e "%{F$c_min_01}$min_01%{F-} %{F$c_min_05}$min_05%{F-} %{F$c_min_15}$min_15%{F-}"

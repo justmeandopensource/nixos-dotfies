@@ -50,8 +50,6 @@ in
           dmenu
           dunst
           feh
-          i3blocks
-          i3status
           lxappearance
           networkmanagerapplet
           papirus-icon-theme
@@ -68,8 +66,13 @@ in
     printing.enable = true;
   };
 
-  environment.pathsToLink = [ "/libexec" ];
-  environment.etc.hosts.mode = "0644";
+  environment = {
+    pathsToLink = [ "/libexec" ];
+    etc = {
+      hosts.mode = "0644";
+      "powerlevel10k/powerlevel10k.zsh-theme".source = "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+    };
+  };
 
   sound = {
     enable = true;
@@ -114,6 +117,7 @@ in
     git
     gnucash
     qutebrowser
+    htop
     killall
     kubectl
     kubectx
@@ -125,6 +129,7 @@ in
     lsof
     mpv
     mplayer
+    redshift
     rclone
     ruby
     simplescreenrecorder
@@ -172,6 +177,7 @@ in
     )
     xdotool
     zathura
+    zsh-powerlevel10k
   ];
 
   virtualisation = {

@@ -110,6 +110,7 @@ in
   environment.systemPackages = with pkgs; [
     alacritty
     bc
+    bitwarden
     copyq
     firefox
     flameshot

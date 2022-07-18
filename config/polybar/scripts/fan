@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-FAN1=$(sensors | grep fan1 | awk '{print $2}')
+FAN=$(sensors | grep fan1 | awk '{print $2}')
 
-if [[ "$FAN1" -ne "0" ]]; then
-  echo "%{B#FFD2A6}%{F#9C4F02} $FAN1 %{F-}%{B-}"
+if [[ "$FAN" -ne "0" ]]; then
+  echo $FAN
 else
   echo ""
 fi

@@ -127,6 +127,7 @@ in
     libreoffice
     lm_sensors
     lsof
+    minder 
     mpv
     mplayer
     redshift

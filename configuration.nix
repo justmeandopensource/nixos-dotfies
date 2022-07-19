@@ -113,15 +113,18 @@ in
     bitwarden
     bitwarden-cli
     copyq
+    docker-compose
     firefox
     flameshot
     fusuma
+    gimp
     git
     gnucash
     qutebrowser
     htop
     keyutils
     killall
+    kube3d
     kubectl
     kubectx
     k9s
@@ -140,6 +143,7 @@ in
     slack
     teams
     thunderbird
+    tmux
     todoist-electron
     unzip
     vagrant

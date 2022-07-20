@@ -37,7 +37,7 @@ bindsym $mod+Shift+c exec --no-startup-id "$HOME/opt/scripts/junglecamtoggle"
 bindsym $mod+Shift+e exec leafpad
 bindsym $mod+Shift+p exec pavucontrol
 bindsym $mod+Shift+w exec qutebrowser
-bindsym $mod+Shift+y exec alacritty --class mpsyt --title mpsyt -e "$HOME/.local/bin/mpsyt"
+bindsym $mod+Shift+f exec alacritty --class ranger --title ranger -e ranger
 
 # hacky multi-monitor switch helper
 bindsym $mod+Ctrl+1 exec "$HOME/opt/scripts/switch-monitor builtin"
@@ -58,7 +58,7 @@ exec --no-startup-id dunst
 exec --no-startup-id picom -b
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
-exec --no-startup-id redshift-gtk -l 52.37092:-1.26417 # Rugby
+exec --no-startup-id redshift-gtk -l 52.37092:-1.26417 -t 5700:3000 # Rugby
 exec --no-startup-id copyq
 exec --no-startup-id fusuma
 
@@ -153,8 +153,8 @@ for_window [class="MPlayer"] floating enable
 for_window [class="Virt-viewer"] floating enable
 for_window [class="System-config-printer.py"] floating enable border normal
 for_window [class="SimpleScreenRecorder"] floating enable border normal
-for_window [title="mpsyt"] floating enable resize set 900 900
-for_window [title="mpsyt"] move position 100 80
+for_window [title="ranger"] floating enable resize set 1500 900
+for_window [title="ranger"] move position 200 150
 for_window [class="mpv"] floating enable sticky enable resize set 640 360
 for_window [class="mpv"] move position 1275 35
 for_window [class="MPlayer" title="junglecam"] floating enable sticky enable

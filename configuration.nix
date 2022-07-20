@@ -122,6 +122,7 @@ in
     gnucash
     qutebrowser
     htop
+    jq
     keyutils
     killall
     kube3d
@@ -215,6 +216,17 @@ in
     meslo-lgs-nf
     roboto
   ];
+
+  xdg.mime = {
+    enable = true;
+    defaultApplications = {
+      "text/html" = "org.qutebrowser.qutebrowser.desktop";
+      "x-scheme-handler/http" = "org.qutebrowser.qutebrowser.desktop";
+      "x-scheme-handler/https" = "org.qutebrowser.qutebrowser.desktop";
+      "x-scheme-handler/about" = "org.qutebrowser.qutebrowser.desktop";
+      "x-scheme-handler/unknown" = "org.qutebrowser.qutebrowser.desktop";
+    };
+  };
 
   nixpkgs.config.allowUnfree = true;
 

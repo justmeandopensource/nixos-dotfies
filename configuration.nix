@@ -127,6 +127,7 @@ in
     kube3d
     kubectl
     kubectx
+    kubernetes-helm
     k9s
     leafpad
     libnotify

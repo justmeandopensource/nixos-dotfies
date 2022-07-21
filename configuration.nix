@@ -36,7 +36,22 @@ in
         defaultSession = "none+i3";
         lightdm = {
           enable = true;
-          greeter.enable = true;
+          greeters.mini = {
+            enable = true;
+            user = "venkatn";
+            extraConfig = ''
+              [greeter]
+              show-password-label = false
+              invalid-password-text = You are not Venkat. Are you?
+              password-alignment = left
+              [greeter-theme]
+              border-width = 1px
+              window-color = "#403f3f"
+              password-color = "#a19f9f"
+              password-border-width = 1px
+              background-image = "/usr/share/backgrounds/monk-wallpaper-zoom-blurred.jpg"
+            '';
+          };
         };
       };
       windowManager.i3 = {
@@ -63,7 +78,10 @@ in
       libinput.enable = true;
       videoDrivers = [ "displaylink" "modesetting" ];
     };
-    printing.enable = true;
+    printing = {
+      enable = true;
+      drivers = [ pkgs.cnijfilter2 ];
+    };
   };
 
   environment = {
@@ -114,6 +132,7 @@ in
     bitwarden-cli
     copyq
     docker-compose
+    file
     firefox
     flameshot
     fusuma

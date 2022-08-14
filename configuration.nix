@@ -20,6 +20,7 @@ in
   networking.networkmanager.enable = true;
 
   time.timeZone = "Europe/London";
+  #time.timeZone = "Asia/Calcutta";
 
   services = {
     blueman.enable = true;
@@ -29,6 +30,7 @@ in
         "#0 * * * *     ${primary_user} \$HOME/opt/scripts/backup"
       ];
     };
+    vnstat.enable = true;
     xserver = {
       enable = true;
       layout = "gb";
@@ -205,6 +207,7 @@ in
       polybar
     )
     xdotool
+    yt-dlp
     zathura
     zsh-powerlevel10k
   ];

@@ -5,7 +5,7 @@ API_KEY="e0160e7f77434e10242b1d7bab182e19"
 
 # Check on http://openweathermap.org/find
 CITY_ID="2638978" # Rugby, Warwickshire
-
+#CITY_ID="1254649" # Thanjavur, India
 FREEZING="#03D7FC"
 COOL="#9E9E9E"
 WARM="#F0C674"

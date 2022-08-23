@@ -5,6 +5,8 @@ Try to automate below stuff
 * sudo mkdir -p /usr/local/bin
 * cp monk-wallpaper.jpg /home/venkatn/.background-image
 * cp -r config/* /home/venkatn/.config/
+* update rclone token
+* update jbinance token
 
 * lxappearance - 
      Font = Roboto 11

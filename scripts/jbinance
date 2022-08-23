@@ -5,8 +5,8 @@ from binance.client import Client
 import argparse
 
 def get_client():
-    apiKey    = "X3G2v0ntk3RO9262qwH73SFEd9V8uDKL6dZCwDEQVQWC3QaZMS6QMJeNEUqaq2dO"
-    apiSecret = "SEd0DrquaQ4w3FRacD6MZ8AZOjCE1ky5M4vXd2I1nlCOhEmhj4HkDLotr9iT2COL"
+    apiKey    = "<PASTE_API_KEY>"
+    apiSecret = "<PASTE_API_SERET>"
     return Client(apiKey, apiSecret)
 
 def get_coin_stats(symbol, item=None):

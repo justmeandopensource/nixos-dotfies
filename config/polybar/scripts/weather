@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Based on http://openweathermap.org/current
 
-API_KEY="e0160e7f77434e10242b1d7bab182e19"
+API_KEY="<PASTE_API_KEY>"
 
 # Check on http://openweathermap.org/find
 CITY_ID="2638978" # Rugby, Warwickshire

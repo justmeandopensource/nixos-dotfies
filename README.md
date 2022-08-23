@@ -7,6 +7,8 @@ Try to automate below stuff
 * cp -r config/* /home/venkatn/.config/
 * update rclone token
 * update jbinance token
+* update polybar youtube module api key
+* update polybar weather api key
 * rclone download stuff from cloud
 
 * lxappearance - 

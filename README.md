@@ -7,6 +7,7 @@ Try to automate below stuff
 * cp -r config/* /home/venkatn/.config/
 * update rclone token
 * update jbinance token
+* rclone download stuff from cloud
 
 * lxappearance - 
      Font = Roboto 11

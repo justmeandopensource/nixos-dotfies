@@ -2,7 +2,7 @@
 
 RCL_REMOTE="wgdrive"
 RCL_OPTIONS="--create-empty-src-dirs --verbose"
-BACKUP_LIST="/tmp/rclone-backup-list.$$"
+BACKUP_LIST="/tmp/rclone-sync-from-cloud-list.$$"
 
 cat > $BACKUP_LIST << EOF
 /vault/**
@@ -29,8 +29,8 @@ if [[ "$?" -ne 0 ]]; then
   exit 1
 fi
 
-echo "[INF] Starting backup ..."
+echo "[INF] Starting to sync from the cloud ..."
 # Relies on ~/.config/rclone/rclone.conf for destination and credential token
-rclone sync -L --include-from ${BACKUP_LIST} ${HOME} ${RCL_REMOTE}:"junix-backup" ${RCL_OPTIONS} $1
+rclone sync -L --include-from ${BACKUP_LIST} ${RCL_REMOTE}:"junix-backup" ${HOME} ${RCL_OPTIONS} $1
 
-echo "[INF] Completed backup"
+echo "[INF] Completed sync"

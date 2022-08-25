@@ -21,6 +21,7 @@ in
 
   time.timeZone = "Europe/London";
   #time.timeZone = "Asia/Calcutta";
+  i18n.defaultLocale = "en_gb.UTF-8";
 
   services = {
     blueman.enable = true;

@@ -58,7 +58,8 @@ exec --no-startup-id dunst
 exec --no-startup-id picom -b
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
-exec --no-startup-id redshift-gtk -l 52.37092:-1.26417 -t 5700:3000 # Rugby
+#exec --no-startup-id redshift-gtk -l 52.37092:-1.26417 -t 5700:3000 # RGB
+#exec --no-startup-id redshift-gtk -l 10.786999:79.137825 -t 5700:3000 # TNJ
 exec --no-startup-id copyq
 exec --no-startup-id fusuma
 
@@ -92,8 +93,16 @@ bindsym XF86AudioLowerVolume exec amixer sset 'Master' 5%-
 bindsym XF86AudioRaiseVolume exec amixer sset 'Master' 5%+
 
 # Brightness controls
-bindsym XF86MonBrightnessUp exec brightnessctl set +5%
-bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+
+## uncomment below two lines for normal usecase
+#bindsym XF86MonBrightnessUp exec brightnessctl set +5%
+#bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+
+## my display in Dell XPS is broken 
+##  where I can't adjust brightness using standard methods
+##  hence this hack
+bindsym XF86MonBrightnessUp exec "$HOME/opt/scripts/brightness-hack up"
+bindsym XF86MonBrightnessDown exec "$HOME/opt/scripts/brightness-hack down"
 
 # Workspace names
 # Eg: set $ws1 1:mail

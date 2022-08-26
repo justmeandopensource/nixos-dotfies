@@ -56,3 +56,5 @@ vbox-hostonlyif-remove()
 [[ ! -f /etc/powerlevel10k/powerlevel10k.zsh-theme ]] || source /etc/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+which keyctl >/dev/null 2>&1
+[[ "$?" == "0" ]] && keyctl link @u @s

@@ -130,6 +130,7 @@ in
  
   environment.systemPackages = with pkgs; [
     alacritty
+    awscli2
     bc
     bitwarden
     bitwarden-cli

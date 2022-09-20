@@ -7,19 +7,22 @@ fi
 
 TMPFILE=/tmp/brightness-hack
 
+# http://www.geonames.org/
+# Rugby cordinates - 52.37092:-1.26417
+
 if [[ -f $TMPFILE ]]; then
   VAL=$(<$TMPFILE)
   if [[ "$1" == "up" ]]; then
     if [[ "$VAL" != "1.0" ]]; then
       NEWVAL=$(echo $VAL + 0.2 | bc)
       echo $NEWVAL > $TMPFILE
-      redshift -m randr -x && redshift -m randr -o -l 10.786999:79.137825 -t 5700:3000 -b $NEWVAL
+      redshift -m randr -x && redshift -m randr -o -l 52.37092:-1.26417 -t 5700:4000 -b $NEWVAL
     fi
   else
     if [[ "$VAL" != ".2" ]]; then
       NEWVAL=$(echo $VAL - 0.2 | bc)
       echo $NEWVAL > $TMPFILE
-      redshift -m randr -x && redshift -m randr -o -l 10.786999:79.137825 -t 5700:3000 -b $NEWVAL
+      redshift -m randr -x && redshift -m randr -o -l 52.37092:-1.26417 -t 5700:4000 -b $NEWVAL
     fi
   fi
 else

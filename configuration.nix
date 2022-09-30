@@ -21,7 +21,7 @@ in
 
   time.timeZone = "Europe/London";
   #time.timeZone = "Asia/Calcutta";
-  i18n.defaultLocale = "en_gb.UTF-8";
+  i18n.defaultLocale = "en_GB.UTF-8";
 
   services = {
     blueman.enable = true;
@@ -79,7 +79,7 @@ in
         ];
       };
       libinput.enable = true;
-      videoDrivers = [ "displaylink" "modesetting" ];
+      #videoDrivers = [ "displaylink" "modesetting" ];
     };
     printing = {
       enable = true;

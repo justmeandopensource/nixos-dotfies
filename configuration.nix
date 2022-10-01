@@ -170,6 +170,7 @@ in
     thunderbird
     tmux
     todoist-electron
+    tree
     unzip
     vagrant
     vim

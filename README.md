@@ -6,7 +6,6 @@ wpa_supplicant -B -i wlp0s20f3 -c <(wpa_passphrase 'SSID' 'PASSWORD')
 ```
 
 Stuff to do
-* run bootstrap.sh as venkatn user
 * update sensitive information 
   * rclone token
   * jbinance api key and secret
@@ -22,4 +21,3 @@ Stuff to do
   * Nix by Baptist BENOIST
 * gnucash > preferences > Numbers, Date, Time > Force Prices to display as decimals
 * bw login
-* "keyctl link @u @s" needs to be executed at startup

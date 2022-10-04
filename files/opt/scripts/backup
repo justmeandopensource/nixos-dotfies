@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if [[ ! -f "$HOME/.backup" ]]; then
+  echo "$HOME/.backup doesn't exist. Skipping backup."
+  exit 1
+fi
+
 RCL_REMOTE="wgdrive"
 RCL_OPTIONS="--create-empty-src-dirs --verbose"
 BACKUP_LIST="/tmp/rclone-backup-list.$$"

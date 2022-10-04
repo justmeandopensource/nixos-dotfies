@@ -11,6 +11,7 @@ in
   imports =
     [
       ./hardware-configuration.nix
+      ./home.nix
     ];
 
   boot.loader.systemd-boot.enable = true;
@@ -28,7 +29,7 @@ in
     cron = {
       enable = true;
       systemCronJobs = [
-        "#0 * * * *     ${primary_user} \$HOME/opt/scripts/backup"
+        "0 * * * *     ${primary_user} \$HOME/opt/scripts/backup"
       ];
     };
     vnstat.enable = true;
@@ -41,7 +42,7 @@ in
           enable = true;
           greeters.mini = {
             enable = true;
-            user = "venkatn";
+            user = "${primary_user}";
             extraConfig = ''
               [greeter]
               show-password-label = false
@@ -52,7 +53,7 @@ in
               window-color = "#403f3f"
               password-color = "#a19f9f"
               password-border-width = 1px
-              background-image = "/usr/share/backgrounds/monk-wallpaper-zoom-blurred.jpg"
+              background-image = "/etc/nixos/files/monk-wallpaper-zoom-blurred.jpg"
             '';
           };
         };
@@ -81,6 +82,7 @@ in
       libinput.enable = true;
       #videoDrivers = [ "displaylink" "modesetting" ];
     };
+    openssh.enable = true;
     printing = {
       enable = true;
       drivers = [ pkgs.cnijfilter2 ];
@@ -130,77 +132,36 @@ in
  
   environment.systemPackages = with pkgs; [
     alacritty
-    awscli2
     bc
-    bitwarden
-    bitwarden-cli
-    copyq
     docker-compose
     file
     firefox
     flameshot
     fusuma
-    gimp
     git
-    gnucash
-    qutebrowser
     htop
-    jq
     keyutils
     killall
-    kube3d
-    kubectl
-    kubectx
-    kubernetes-helm
-    k9s
     leafpad
     libnotify
     libreoffice
     lm_sensors
-    lsof
-    minder 
+    lsof 
     mpv
     mplayer
     redshift
     rclone
     ruby
-    simplescreenrecorder
-    slack
-    teams
-    thunderbird
-    tmux
-    todoist-electron
     tree
     unzip
     vagrant
     vim
     virt-manager
     virt-viewer
-    vscode
     wget
     (pkgs.writers.writeDashBin "vboxmanage" ''
        ${pkgs.virtualbox}/bin/VBoxManage "$@"
     '')
-    (
-      let 
-        my-python-packages = python-packages: with python-packages; [ 
-          colored
-          GitPython
-          humanize
-          icalendar
-          paramiko
-          pyfiglet
-          python-binance
-          python-vagrant
-          requests
-          setuptools
-          scp
-          tabulate
-        ];
-        python-with-my-packages = python3.withPackages my-python-packages;
-      in
-      python-with-my-packages
-    )
     (
       let
         polybar = pkgs.polybar.override {
@@ -210,7 +171,6 @@ in
       polybar
     )
     xdotool
-    yt-dlp
     zathura
     zsh-powerlevel10k
   ];
@@ -241,17 +201,6 @@ in
     meslo-lgs-nf
     roboto
   ];
-
-  xdg.mime = {
-    enable = true;
-    defaultApplications = {
-      "text/html" = "org.qutebrowser.qutebrowser.desktop";
-      "x-scheme-handler/http" = "org.qutebrowser.qutebrowser.desktop";
-      "x-scheme-handler/https" = "org.qutebrowser.qutebrowser.desktop";
-      "x-scheme-handler/about" = "org.qutebrowser.qutebrowser.desktop";
-      "x-scheme-handler/unknown" = "org.qutebrowser.qutebrowser.desktop";
-    };
-  };
 
   nixpkgs.config.allowUnfree = true;
 

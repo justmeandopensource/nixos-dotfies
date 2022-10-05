@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+ACTION=$(echo -e "shutdown\nreboot\nlogout" | rofi -dmenu)
+
+case "$ACTION" in
+  shutdown)
+    systemctl poweroff
+    ;;
+  reboot)
+    systemctl reboot
+    ;;
+  logout)
+    i3-msg exit
+    ;;
+  *)
+    exit 2
+esac
+

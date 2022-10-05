@@ -49,6 +49,8 @@ bindsym $mod+Ctrl+w exec "$HOME/opt/scripts/junglebrowserlauncher"
 
 bindsym $mod+Ctrl+Shift+w exec qutebrowser ":open -p"
 
+bindsym $mod+Ctrl+Delete exec "$HOME/opt/scripts/powermenu"
+
 bindsym $mod+space --release exec "rofi -show combi"
 bindsym $mod+Print --release exec flameshot gui
 bindsym $mod+q kill
@@ -144,10 +146,9 @@ bindsym $mod+Ctrl+Shift+Up move workspace to output up
 bindsym $mod+Ctrl+Shift+Down move workspace to output down
 
 # Open applications on specific workspaces
-#assign [class="Gnome-terminal|Pcmanfm|Leafpad"] $ws1
 assign [class="Alacritty"] $ws1
-assign [class="qutebrowser|Google-chrome|firefox"] $ws2
-assign [class="Slack|Microsoft Teams - Preview|discord|Thunderbird"] $ws3
+assign [class="qutebrowser|firefox"] $ws2
+assign [class="Slack|Microsoft Teams - Preview|Thunderbird"] $ws3
 assign [class="Code|Leafpad"] $ws4
 assign [class="libreoffice-*|Soffice|Virt-manager|VirtualBox Manager"] $ws5
 assign [class="Gnucash"] $ws6
@@ -175,20 +176,6 @@ focus_on_window_activation focus
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Ctrl+r reload
 bindsym $mod+Ctrl+t restart
-
-# Set shut down, restart and locking features
-bindsym $mod+Ctrl+Delete mode "$mode_system"
-set $mode_system (l)ogout, s(u)spend, (r)eboot, (s)hutdown
-mode "$mode_system" {
-    bindsym u exec --no-startup-id $HOME/opt/scripts/i3exit suspend, mode "default"
-    bindsym l exec --no-startup-id $HOME/opt/scripts/i3exit logout, mode "default"
-    bindsym r exec --no-startup-id $HOME/opt/scripts/i3exit reboot, mode "default"
-    bindsym s exec --no-startup-id $HOME/opt/scripts/i3exit shutdown, mode "default"
-
-    # exit system mode: "Enter" or "Escape"
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
 
 # Resize window (you can also use the mouse for that)
 bindsym $mod+r mode "resize"

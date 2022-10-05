@@ -18,6 +18,7 @@ in
       ./modules/alacritty.nix
       ./modules/dunst.nix
       ./modules/xidlehook.nix
+      ./modules/picom.nix
     ];
 
     home.file.".config".source = ./files/config;

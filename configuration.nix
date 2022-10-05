@@ -72,7 +72,6 @@ in
           networkmanagerapplet
           papirus-icon-theme
           pavucontrol
-          picom
           playerctl
           ranger
           rofi
@@ -218,4 +217,3 @@ in
   };
 
 }
-

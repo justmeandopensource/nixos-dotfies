@@ -17,6 +17,7 @@ in
       ./modules/zsh.nix
       ./modules/alacritty.nix
       ./modules/dunst.nix
+      ./modules/xidlehook.nix
     ];
 
     home.file.".config".source = ./files/config;
@@ -28,7 +29,6 @@ in
     home.file.".background-image".source = ./files/monk-wallpaper.jpg;
     home.file.".p10k.zsh".source = ./files/home/.p10k.zsh;
     home.file.".tmux.conf".source = ./files/home/.tmux.conf;
-    home.file.".Xresources".source = ./files/home/.Xresources;
 
     xdg.mimeApps = {
       enable = true;
@@ -39,6 +39,12 @@ in
         "x-scheme-handler/about" = [ "org.qutebrowser.qutebrowser.desktop" ];
         "x-scheme-handler/unknown" = [ "org.qutebrowser.qutebrowser.desktop" ];
       };
+    };
+
+    xresources.properties = {
+      "Xft.dpi" = 96;
+      "Xcursor.theme" = "Breeze";
+      "Xcursor.size" = 20;
     };
 
     home.stateVersion = "22.05";

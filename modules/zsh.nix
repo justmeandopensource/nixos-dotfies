@@ -31,9 +31,7 @@
       which keyctl >/dev/null 2>&1
       [[ "$?" == "0" ]] && keyctl link @u @s
 
-      #-===================================================-#
       # Functions
-      #-===================================================-#
 
       blink()
       {
@@ -52,10 +50,9 @@
         [[ -n $net ]] && sudo vboxmanage hostonlyif remove $net
       }
 
-    '';
-
-    profileExtra = ''
+      # Exports
       export PATH=$HOME/opt/scripts:$PATH;
+
     '';
 
     sessionVariables = {

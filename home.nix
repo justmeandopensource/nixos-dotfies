@@ -16,6 +16,7 @@ in
       ./modules/packages.nix
       ./modules/zsh.nix
       ./modules/alacritty.nix
+      ./modules/dunst.nix
     ];
 
     home.file.".config".source = ./files/config;

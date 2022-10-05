@@ -67,7 +67,6 @@ in
           betterlockscreen
           brightnessctl
           dmenu
-          dunst
           feh
           lxappearance
           networkmanagerapplet

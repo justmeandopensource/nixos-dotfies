@@ -54,7 +54,6 @@ bindsym $mod+Print --release exec flameshot gui
 bindsym $mod+q kill
 
 # Autostart applications
-exec --no-startup-id dunst
 exec --no-startup-id picom -b
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet

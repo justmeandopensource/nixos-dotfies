@@ -17,7 +17,6 @@ in
       ./modules/zsh.nix
       ./modules/alacritty.nix
       ./modules/dunst.nix
-      ./modules/xidlehook.nix
       ./modules/picom.nix
     ];
 

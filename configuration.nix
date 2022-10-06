@@ -135,7 +135,6 @@ in
     file
     firefox
     flameshot
-    fusuma
     git
     htop
     keyutils
@@ -168,7 +167,6 @@ in
       in
       polybar
     )
-    xdotool
     zathura
     zsh-powerlevel10k
   ];

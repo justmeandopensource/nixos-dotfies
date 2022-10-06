@@ -8,6 +8,7 @@
     bitwarden-cli
     copyq
     discord
+    fusuma
     gimp
     gnucash
     jq
@@ -26,6 +27,7 @@
     tmux
     todoist-electron
     vscode
+    xdotool
     yt-dlp
     (
       let

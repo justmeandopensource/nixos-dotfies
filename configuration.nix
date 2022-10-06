@@ -200,7 +200,14 @@ in
     roboto
   ];
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    packageOverrides = super: {
+      mplayer = super.mplayer.override {
+        v4lSupport = true;
+      };
+    };
+  };
 
   nix.gc = {
     automatic = true;

@@ -18,6 +18,9 @@ floating_modifier $mod
 # Focus follows mouse
 focus_follows_mouse yes
 
+# Default workspace layout
+workspace_layout tabbed
+
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout tabbed
 bindsym $mod+d layout toggle split

@@ -47,5 +47,6 @@
       in
       python-with-my-packages
     )
+    zoom-us
   ];
 }

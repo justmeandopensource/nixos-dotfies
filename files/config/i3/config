@@ -148,7 +148,7 @@ bindsym $mod+Ctrl+Shift+Down move workspace to output down
 # Open applications on specific workspaces
 assign [class="Alacritty"] $ws1
 assign [class="qutebrowser|firefox"] $ws2
-assign [class="Slack|Microsoft Teams - Preview|Thunderbird"] $ws3
+assign [class="Slack|Microsoft Teams - Preview|discord|Thunderbird"] $ws3
 assign [class="Code|Leafpad"] $ws4
 assign [class="libreoffice-*|Soffice|Virt-manager|VirtualBox Manager"] $ws5
 assign [class="Gnucash"] $ws6

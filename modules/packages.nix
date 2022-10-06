@@ -7,6 +7,7 @@
     bitwarden
     bitwarden-cli
     copyq
+    discord
     gimp
     gnucash
     jq

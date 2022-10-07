@@ -6,7 +6,6 @@
     awscli2
     bitwarden
     bitwarden-cli
-    copyq
     discord
     fusuma
     gimp

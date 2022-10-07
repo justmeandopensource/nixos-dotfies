@@ -63,7 +63,6 @@ exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 #exec --no-startup-id redshift-gtk -l 52.37092:-1.26417 -t 5700:3000 # RGB
 #exec --no-startup-id redshift-gtk -l 10.786999:79.137825 -t 5700:3000 # TNJ
-exec --no-startup-id copyq
 exec --no-startup-id fusuma
 
 bindsym $mod+Left focus left

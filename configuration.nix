@@ -12,6 +12,7 @@ in
     [
       ./hardware-configuration.nix
       ./home.nix
+      ./modules/lxd.nix
     ];
 
   boot.loader.systemd-boot.enable = true;

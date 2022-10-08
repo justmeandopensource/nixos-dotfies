@@ -18,7 +18,7 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "junix";
+  networking.hostName = "xps";
   networking.networkmanager.enable = true;
 
   time.timeZone = "Europe/London";
@@ -26,6 +26,7 @@ in
   i18n.defaultLocale = "en_GB.UTF-8";
 
   services = {
+    autorandr.enable = true;
     blueman.enable = true;
     cron = {
       enable = true;

@@ -31,6 +31,6 @@ fi
 
 echo "[INF] Starting to sync from the cloud ..."
 # Relies on ~/.config/rclone/rclone.conf for destination and credential token
-rclone sync -L --include-from ${BACKUP_LIST} ${RCL_REMOTE}:"junix-backup" ${HOME} ${RCL_OPTIONS} $1
+rclone sync -L --include-from ${BACKUP_LIST} ${RCL_REMOTE}:"xps-backup" ${HOME} ${RCL_OPTIONS} $1
 
 echo "[INF] Completed sync"

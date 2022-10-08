@@ -13,11 +13,12 @@ in
   home-manager.users.venkatn = {
 
     imports = [
-      ./modules/packages.nix
-      ./modules/zsh.nix
       ./modules/alacritty.nix
+      ./modules/autorandr.nix
       ./modules/dunst.nix
+      ./modules/packages.nix
       ./modules/picom.nix
+      ./modules/zsh.nix
     ];
 
     home.file.".config".source = ./files/config;

@@ -36,6 +36,6 @@ fi
 
 echo "[INF] Starting backup ..."
 # Relies on ~/.config/rclone/rclone.conf for destination and credential token
-rclone sync -L --include-from ${BACKUP_LIST} ${HOME} ${RCL_REMOTE}:"junix-backup" ${RCL_OPTIONS} $1
+rclone sync -L --include-from ${BACKUP_LIST} ${HOME} ${RCL_REMOTE}:"xps-backup" ${RCL_OPTIONS} $1
 
 echo "[INF] Completed backup"

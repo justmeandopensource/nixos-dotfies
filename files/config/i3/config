@@ -34,21 +34,16 @@ exec --no-startup-id xrandr --output eDP-1 --mode 1920x1200
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 bindsym $mod+Shift+Return exec --no-startup-id alacritty
-bindsym $mod+Shift+Ctrl+Return exec --no-startup-id "HISTFILE=$HOME/.zsh_history_jmos alacritty -t jmos"
 
-bindsym $mod+Shift+c exec --no-startup-id "$HOME/opt/scripts/junglecamtoggle"
+bindsym $mod+Shift+c exec --no-startup-id "$HOME/opt/scripts/camtoggle"
 bindsym $mod+Shift+e exec leafpad
 bindsym $mod+Shift+p exec pavucontrol
 bindsym $mod+Shift+w exec qutebrowser
 bindsym $mod+Shift+f exec alacritty --class ranger --title ranger -e ranger
 
-# hacky multi-monitor switch helper
-bindsym $mod+Ctrl+1 exec "$HOME/opt/scripts/switch-monitor builtin"
-bindsym $mod+Ctrl+2 exec "$HOME/opt/scripts/switch-monitor samsung"
-
 bindsym $mod+Ctrl+c exec "rofi -show calc -modi calc -no-show-match -no-sort"
 bindsym $mod+Ctrl+m exec "amixer -q sset Capture toggle"
-bindsym $mod+Ctrl+w exec "$HOME/opt/scripts/junglebrowserlauncher"
+bindsym $mod+Ctrl+w exec "$HOME/opt/scripts/browserlauncher"
 
 bindsym $mod+Ctrl+Shift+w exec qutebrowser ":open -p"
 

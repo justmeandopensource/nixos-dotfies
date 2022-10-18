@@ -117,7 +117,7 @@ in
     isNormalUser = true;
     initialPassword = "password1234";
     shell = pkgs.zsh;
-    extraGroups = [ "wheel" "vboxusers" "libvirtd" "docker" "audio" "input" ];
+    extraGroups = [ "wheel" "vboxusers" "libvirtd" "docker" "audio" "input" "lxd" ];
   };
 
   security.sudo.extraRules= [
@@ -184,6 +184,10 @@ in
       };
     };
   };
+
+  environment.etc."vbox/networks.conf".text = ''
+    * 192.168.0.0/16 172.16.16.0/24
+  '';
 
   programs = {
     dconf.enable = true;

@@ -17,6 +17,7 @@
     kubernetes-helm
     k9s
     minder
+    pdftk
     pipe-viewer
     qutebrowser
     simplescreenrecorder

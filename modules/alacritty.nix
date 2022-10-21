@@ -18,6 +18,17 @@
         };
       };
 
+      shell = {
+        program = "tmux";
+        args = [
+          "new-session"
+          "-A"
+          "-D"
+          "-s"
+          "main"
+        ];
+      };
+
       cursor = {
         style = {
           shape = "underline";

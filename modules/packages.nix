@@ -22,6 +22,7 @@
     qutebrowser
     simplescreenrecorder
     slack
+    speedtest-cli
     teams
     thunderbird
     tmux

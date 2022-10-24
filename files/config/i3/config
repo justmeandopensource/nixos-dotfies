@@ -37,7 +37,7 @@ bindsym $mod+Shift+Return exec --no-startup-id alacritty
 
 bindsym $mod+Shift+c exec --no-startup-id "$HOME/opt/scripts/camtoggle"
 bindsym $mod+Shift+e exec leafpad
-bindsym $mod+Shift+p exec pavucontrol
+bindsym $mod+Shift+p exec alacritty --class pipeviewer --title pipeviewer -e pipe-viewer
 bindsym $mod+Shift+w exec qutebrowser
 bindsym $mod+Shift+f exec alacritty --class ranger --title ranger -e ranger
 
@@ -144,9 +144,9 @@ bindsym $mod+Ctrl+Shift+Down move workspace to output down
 
 # Open applications on specific workspaces
 assign [class="Alacritty"] $ws1
-assign [class="qutebrowser|firefox"] $ws2
+assign [class="qutebrowser|firefox|Google-chrome"] $ws2
 assign [class="Slack|Microsoft Teams - Preview|discord|Thunderbird"] $ws3
-assign [class="Code|Leafpad"] $ws4
+assign [class="Code"] $ws4
 assign [class="libreoffice-*|Soffice|Virt-manager|VirtualBox Manager"] $ws5
 assign [class="Gnucash"] $ws6
 
@@ -155,11 +155,11 @@ for_window [class="Lxappearance"] floating enable sticky enable border normal
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Simple-scan"] floating enable border normal
 for_window [class="MPlayer"] floating enable
-for_window [class="Virt-viewer"] floating enable
-for_window [class="System-config-printer.py"] floating enable border normal
 for_window [class="SimpleScreenRecorder"] floating enable border normal
 for_window [title="ranger"] floating enable resize set 1500 900
 for_window [title="ranger"] move position 200 150
+for_window [title="pipeviewer"] floating enable resize set 1500 900
+for_window [title="pipeviewer"] move position 200 150
 for_window [class="mpv"] floating enable sticky enable resize set 640 360
 for_window [class="mpv"] move position 1275 35
 for_window [class="MPlayer" title="junglecam"] floating enable sticky enable

@@ -117,7 +117,7 @@ in
     isNormalUser = true;
     initialPassword = "password1234";
     shell = pkgs.zsh;
-    extraGroups = [ "wheel" "vboxusers" "libvirtd" "docker" "audio" "input" "lxd" ];
+    extraGroups = [ "wheel" "vboxusers" "libvirtd" "docker" "audio" "input" "lxd" "lp" "scanner" "networkmanager" ];
   };
 
   security.sudo.extraRules= [

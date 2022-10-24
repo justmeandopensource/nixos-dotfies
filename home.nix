@@ -18,6 +18,7 @@ in
       ./modules/dunst.nix
       ./modules/packages.nix
       ./modules/picom.nix
+      ./modules/rofi.nix
       ./modules/zsh.nix
     ];
 

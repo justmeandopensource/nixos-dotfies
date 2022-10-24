@@ -76,7 +76,6 @@ in
           pavucontrol
           playerctl
           ranger
-          rofi
         ];
       };
       libinput.enable = true;

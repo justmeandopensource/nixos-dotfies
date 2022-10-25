@@ -3,6 +3,11 @@
 
 API_KEY="<PASTE_API_KEY>"
 
+if [[ "$API_KEY" == "<PASTE_API_KEY>" ]]; then
+  echo -e "\uf57a"
+  exit 1
+fi
+
 # Check on http://openweathermap.org/find
 CITY_ID="2638978" # Rugby, Warwickshire
 #CITY_ID="1254649" # Thanjavur, India

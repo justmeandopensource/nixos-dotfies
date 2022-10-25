@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-FAN=$(sensors | grep fan1 | awk '{print $2}')
+FAN=$(sensors 2>/dev/null | grep fan1 | awk '{print $2}')
 
 if [[ "$FAN" -ne "0" ]]; then
   echo $FAN

@@ -8,6 +8,10 @@ import sys
 
 key = "<PASTE_API_KEY_HERE>"
 
+if key == "<PASTE_API_KEY_HERE>":
+    print("invalid api key")
+    sys.exit(1)
+
 for x in range(3):
     try:
         data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=wenkatn&key="+key).read()

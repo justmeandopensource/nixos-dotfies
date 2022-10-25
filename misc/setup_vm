@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+# assumptions
+#   - uefi boot
+#   - running this script as root user
+
+readonly DISK=vda
+readonly SWAP=4GB
+
+# partitioning
+#   use gpt partition table
+#   first 512M for boot partition
+#   last 4G for swap partition
+#   all in between for root partition
+parted /dev/$DISK -- mklabel gpt
+parted /dev/$DISK -- mkpart primary 512MB -${SWAP}
+parted /dev/$DISK -- mkpart primary linux-swap -${SWAP} 100%
+parted /dev/$DISK -- mkpart ESP fat32 1MB 512MB
+parted /dev/$DISK -- set 3 esp on
+
+# formatting
+mkfs.ext4 -L nixos /dev/${DISK}1           # root partition
+mkswap -L swap /dev/${DISK}2               # swap partition
+mkfs.fat -F 32 -n boot /dev/${DISK}3       # EFI system partition
+
+# mount filesystems
+mount /dev/disk/by-label/nixos /mnt
+mkdir /mnt/boot
+mount /dev/disk/by-label/boot /mnt/boot
+swapon /dev/${DISK}2
+
+# generate initial configuration
+nixos-generate-config --root /mnt
+
+# copy custom configs
+cp -r ../* /mnt/etc/nixos/
+
+# installation
+nixos-install --no-root-passwd

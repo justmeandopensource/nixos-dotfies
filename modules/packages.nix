@@ -20,6 +20,7 @@
     pdftk
     pipe-viewer
     qutebrowser
+    remmina
     simplescreenrecorder
     slack
     speedtest-cli

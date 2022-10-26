@@ -34,6 +34,17 @@ in
         "0 * * * *     ${primary_user} \$HOME/opt/scripts/backup"
       ];
     };
+    locate = {
+      enable = true;
+      interval = "daily";
+      locate = pkgs.mlocate;
+      localuser = null;
+    };
+    openssh.enable = true;
+    printing = {
+      enable = true;
+      drivers = [ pkgs.cnijfilter2 ];
+    };    
     vnstat.enable = true;
     xserver = {
       enable = true;
@@ -80,11 +91,6 @@ in
       };
       libinput.enable = true;
       #videoDrivers = [ "displaylink" "modesetting" ];
-    };
-    openssh.enable = true;
-    printing = {
-      enable = true;
-      drivers = [ pkgs.cnijfilter2 ];
     };
   };
 

@@ -9,7 +9,7 @@ import sys
 key = "<PASTE_API_KEY_HERE>"
 
 if key == "<PASTE_API_KEY_HERE>":
-    print("invalid api key")
+    print("\uf57a")
     sys.exit(1)
 
 for x in range(3):

@@ -16,6 +16,7 @@ in
       ./modules/alacritty.nix
       ./modules/autorandr.nix
       ./modules/dunst.nix
+      ./modules/gtk.nix
       ./modules/packages.nix
       ./modules/picom.nix
       ./modules/rofi.nix

@@ -75,7 +75,6 @@ in
         enable = true;
         package = pkgs.i3-gaps;
         extraPackages = with pkgs; [
-          adapta-gtk-theme
           arandr
           betterlockscreen
           brightnessctl
@@ -83,7 +82,6 @@ in
           feh
           lxappearance
           networkmanagerapplet
-          papirus-icon-theme
           pavucontrol
           playerctl
           ranger
